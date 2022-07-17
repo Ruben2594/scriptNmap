@@ -1,5 +1,5 @@
-rm vuln.csv;
-printf "IP,FQDN,PORT,PROTOCOL,SERVICE,VERSION,OS \n" > vuln.csv;
+rm extract_vuln.csv;
+printf "IP,FQDN,PORT,PROTOCOL,SERVICE,VERSION,OS \n" > extract_vuln.csv;
 for f in *.txt
 do
  echo "Processing $f"
