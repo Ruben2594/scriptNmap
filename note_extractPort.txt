@@ -1,0 +1,11 @@
+#Comando en NMAP para obtener puertos abiertos
+nmap -p- --open -T5 -vvv -n -Pn -oG 127.0.0.1_tcp.txt 127.0.0.1
+
+#Permisos
+chmod +x extractPort.sh
+
+#Ejecutar
+sh extractPort.sh
+
+#Codigo Bash para extraer IP y PUERTOS abiertos en un file CSV separado por espacio.
+egrep -v "^#|Status: Up" *.txt | cut -d' ' -f2,4- | awk '{for(i=1; i<=NF; i++) { a=a" "$i; }; split(a,s,","); for(e in s) { split(s[e],v,"/"); printf "%s" , v[1]} printf "\n"; a="" }' > extract_port.csv

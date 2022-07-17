@@ -1,0 +1,18 @@
+#Comando en NMAP para obtener Vulnerabilidad en los puertos indicados
+nmap -O -f -sS -Pn -sV --script default,vuln -p22,3872,34563,40995 -oN 127.0.0.1_vuln.txt 127.0.0.1
+
+#Permisos
+chmod +x extractVuln.sh
+
+#Ejecutar
+sh extractVuln.sh
+
+#Script en bash para obtener IP,FQDN,PORT,PROTOCOL,SERVICE,VERSION,OS
+# Requerimiento instalar: pip install nmaptocsv
+rm vuln.csv;
+printf "IP,FQDN,PORT,PROTOCOL,SERVICE,VERSION,OS \n" > vuln.csv;
+for f in *.txt
+do
+ echo "Processing $f"
+ nmaptocsv -i "$f" -f ip-fqdn-port-protocol-service-version-os -d ',' | awk '(NR>1)' | sed -e "$ d" >> extract_vuln.csv
+done

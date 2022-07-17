@@ -1,0 +1,1 @@
+egrep -v "^#|Status: Up" *.txt | cut -d' ' -f2,4- | awk '{for(i=1; i<=NF; i++) { a=a" "$i; }; split(a,s,","); for(e in s) { split(s[e],v,"/"); printf "%s" , v[1]} printf "\n"; a="" }' > extract_port.csv
